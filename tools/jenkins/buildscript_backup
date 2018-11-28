@@ -1,0 +1,14 @@
+cd $WORKSPACE
+mkdir -p src/gitlab.tools.vipshop.com/distributedstorage/ds-vdl/
+mpp=`ls -A | grep -v src`
+mv $mpp src/gitlab.tools.vipshop.com/distributedstorage/ds-vdl/
+export GOPATH="$WORKSPACE"
+export PATH=$PATH:/home/apps/vdl/CI/src/github.com/tebeka/go2xunit
+rm -rf $WORKSPACE/testreport
+mkdir $WORKSPACE/testreport/
+cd $WORKSPACE/src/gitlab.tools.vipshop.com/distributedstorage/ds-vdl/
+make
+
+#run cases
+cd $WORKSPACE/src/gitlab.tools.vipshop.com/distributedstorage/ds-vdl/tools/jenkins
+sh runcases_simple.sh
